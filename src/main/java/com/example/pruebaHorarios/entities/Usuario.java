@@ -7,7 +7,7 @@ import java.util.Objects;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
-public abstract class Usuario {
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;
@@ -63,6 +63,14 @@ public abstract class Usuario {
         this.email = email;
     }
 
+    public String getTipo() {
+        if (this instanceof Administrador) {
+            return "ADMIN";
+        } else if (this instanceof Alumno) {
+            return "ALUMNO";
+        }
+        return "";
+    }
 
     @Override
     public String toString() {
