@@ -39,9 +39,9 @@ public class SesionController {
     }
 
     // Obtener sesiones por ID de módulo
-    @GetMapping("/modulo/{moduloId}")
-    public ResponseEntity<List<Sesion>> obtenerSesionesPorModulo(@PathVariable int moduloId) {
-        List<Sesion> sesiones = sesionService.obtenerSesionesPorModulo(moduloId);
+    @GetMapping("/modulo/{idModulo}")
+    public ResponseEntity<List<Sesion>> obtenerSesionesPorModulo(@PathVariable int idModulo) {
+        List<Sesion> sesiones = sesionService.obtenerSesionesPorModulo(idModulo);
         return ResponseEntity.ok(sesiones);
     }
 

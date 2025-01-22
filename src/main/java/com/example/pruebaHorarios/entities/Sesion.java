@@ -23,7 +23,7 @@ public class Sesion {
     private String aula;
 
     @ManyToOne
-    @JoinColumn(name = "id_modulo", nullable = false)
+    @JoinColumn(name = "id_modulo")
     private Modulo modulo;
 
     public Sesion() {

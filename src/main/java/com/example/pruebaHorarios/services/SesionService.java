@@ -30,8 +30,8 @@ public class SesionService {
     }
 
     // Obtener sesiones por ID de módulo
-    public List<Sesion> obtenerSesionesPorModulo(int moduloId) {
-        return sesionRepository.findByModuloId(moduloId);
+    public List<Sesion> obtenerSesionesPorModulo(int idModulo) {
+        return sesionRepository.findByModulo_IdModulo(idModulo);
     }
 
     // Obtener una sesión por ID

@@ -9,5 +9,5 @@ public interface SesionRepository extends JpaRepository<Sesion, Integer> {
 
     List<Sesion> findByDia(String dia);
 
-    List<Sesion> findByModuloId(int moduloId);
+    List<Sesion> findByModulo_IdModulo(int idModulo);
 }
