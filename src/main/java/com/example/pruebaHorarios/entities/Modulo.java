@@ -30,11 +30,9 @@ public class Modulo {
     @OneToMany(mappedBy = "modulo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Sesion> sesiones = new ArrayList<>();
 
-    // Constructor vacío (necesario para JPA)
     public Modulo() {
     }
 
-    // Constructor con parámetros
     public Modulo(String codigo, String nombre, int horasSemana, int horasTotales) {
         this.codigo = codigo;
         this.nombre = nombre;
