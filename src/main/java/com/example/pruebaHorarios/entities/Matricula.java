@@ -1,5 +1,6 @@
 package com.example.pruebaHorarios.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,21 +14,24 @@ public class Matricula {
 
     @ManyToOne
     @JoinColumn(name = "id_alumno", nullable = false)
+    @JsonIgnoreProperties({"matriculas"})
     private Alumno alumno;
 
     @ManyToOne
     @JoinColumn(name = "id_ciclo", nullable = false)
+    @JsonIgnoreProperties({"matriculas", "modulos"})
     private Ciclo cicloFormativo;
 
     @ManyToOne
     @JoinColumn(name = "id_modulo", nullable = false)
+    @JsonIgnoreProperties({"matriculas", "ciclo"})
     private Modulo modulo;
 
-    // Constructor vacío (necesario para JPA)
+
     public Matricula() {
     }
 
-    // Constructor con parámetros
+
     public Matricula(int numMatricula, Alumno alumno, Ciclo cicloFormativo, Modulo modulo) {
         this.numMatricula = numMatricula;
         this.alumno = alumno;
@@ -35,7 +39,7 @@ public class Matricula {
         this.modulo = modulo;
     }
 
-    // Getters y setters
+
     public int getId() {
         return id;
     }
@@ -76,7 +80,6 @@ public class Matricula {
         this.modulo = modulo;
     }
 
-    // Sobrescribir el método toString para depuración
     @Override
     public String toString() {
         return "Matricula{" +

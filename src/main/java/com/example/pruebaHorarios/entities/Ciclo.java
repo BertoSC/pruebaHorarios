@@ -1,5 +1,7 @@
 package com.example.pruebaHorarios.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +19,11 @@ public class Ciclo {
     private int duracion;
 
     @OneToMany(mappedBy = "ciclo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("ciclo")
     private List<Modulo> modulos = new ArrayList<>();
 
     @OneToMany(mappedBy = "cicloFormativo", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("cicloFormativo")
     private List<Matricula> matriculas = new ArrayList<>();
 
     public Ciclo() {
@@ -121,25 +125,23 @@ public class Ciclo {
                 '}';
     }
 
-
-
     public void addModulo(Modulo modulo) {
         modulos.add(modulo);
-        modulo.setCiclo(this); // Establecer la relación inversa
+        modulo.setCiclo(this);
     }
 
     public void removeModulo(Modulo modulo) {
         modulos.remove(modulo);
-        modulo.setCiclo(null); // Eliminar la relación inversa
+        modulo.setCiclo(null);
     }
 
     public void addMatricula(Matricula matricula) {
         matriculas.add(matricula);
-        matricula.setCicloFormativo(this); // Establecer la relación inversa
+        matricula.setCicloFormativo(this);
     }
 
     public void removeMatricula(Matricula matricula) {
         matriculas.remove(matricula);
-        matricula.setCicloFormativo(null); // Eliminar la relación inversa
+        matricula.setCicloFormativo(null);
     }
 }

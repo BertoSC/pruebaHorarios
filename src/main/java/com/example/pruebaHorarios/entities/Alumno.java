@@ -1,5 +1,6 @@
 package com.example.pruebaHorarios.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -13,6 +14,7 @@ import java.util.List;
 public class Alumno extends Usuario {
 
     @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("alumno")
     private List<Matricula> matriculas = new ArrayList<>();
 
 
@@ -20,7 +22,7 @@ public class Alumno extends Usuario {
         super();
     }
 
-    // Constructor con parámetros (utiliza los atributos heredados de Usuario)
+
     public Alumno(String nombreUsuario, String contraseña, String email) {
         super(nombreUsuario, contraseña, email);
     }
@@ -31,7 +33,6 @@ public class Alumno extends Usuario {
     }
 
 
-    // Getters y setters para matriculas
     public List<Matricula> getMatriculas() {
         return matriculas;
     }
@@ -46,13 +47,12 @@ public class Alumno extends Usuario {
         matricula.setAlumno(this);
     }
 
-    // Método para eliminar una matricula
     public void removeMatricula(Matricula matricula) {
         matriculas.remove(matricula);
         matricula.setAlumno(null);
     }
 
-    // Sobrescritura de toString
+
     @Override
     public String toString() {
         return "Alumno{" +

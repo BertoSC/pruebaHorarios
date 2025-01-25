@@ -1,5 +1,7 @@
 package com.example.pruebaHorarios.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,16 +20,20 @@ public class Modulo {
 
     @ManyToOne
     @JoinColumn(name = "id_ciclo", nullable = false)
+    @JsonIgnoreProperties("modulos")
     private Ciclo ciclo;
 
     @OneToMany(mappedBy = "modulo", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("modulo")
     private List<Matricula> matriculas = new ArrayList<>();
 
     @OneToOne
     @JoinColumn(name = "id_profesor")
+    @JsonIgnoreProperties("modulo")
     private Profesor profesor;
 
     @OneToMany(mappedBy = "modulo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("modulo")
     private List<Sesion> sesiones = new ArrayList<>();
 
     public Modulo() {
@@ -113,7 +119,6 @@ public class Modulo {
         this.sesiones = sesiones;
     }
 
-    // Sobrescribir el método toString para depuración
     @Override
     public String toString() {
         return "Modulo{" +
@@ -127,25 +132,25 @@ public class Modulo {
                 '}';
     }
 
-    // Métodos auxiliares para manejar las relaciones
 
     public void addMatricula(Matricula matricula) {
         matriculas.add(matricula);
-        matricula.setModulo(this); // Establecer la relación inversa
+        matricula.setModulo(this);
     }
 
     public void removeMatricula(Matricula matricula) {
         matriculas.remove(matricula);
-        matricula.setModulo(null); // Eliminar la relación inversa
+        matricula.setModulo(null);
     }
 
     public void addSesion(Sesion sesion) {
         sesiones.add(sesion);
-        sesion.setModulo(this); // Establecer la relación inversa
+        sesion.setModulo(this);
     }
 
-    public void removeSesion(Sesion sesion) {
-        sesiones.remove(sesion);
-        sesion.setModulo(null); // Eliminar la relación inversa
+    public void removeSesion (Sesion sesion){
+            sesiones.remove(sesion);
+            sesion.setModulo(null);
+
     }
 }

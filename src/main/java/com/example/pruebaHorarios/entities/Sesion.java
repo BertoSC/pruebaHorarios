@@ -1,5 +1,6 @@
 package com.example.pruebaHorarios.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -24,6 +25,7 @@ public class Sesion {
 
     @ManyToOne
     @JoinColumn(name = "id_modulo")
+    @JsonIgnoreProperties("sesiones")
     private Modulo modulo;
 
     public Sesion() {
@@ -53,7 +55,6 @@ public class Sesion {
         this.modulo = modulo;
     }
 
-    // Getters y setters
     public int getIdSesion() {
         return idSesion;
     }

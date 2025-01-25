@@ -1,5 +1,6 @@
 package com.example.pruebaHorarios.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,7 @@ public class Profesor {
     private String email;
 
     @OneToOne(mappedBy = "profesor")
+    @JsonIgnoreProperties({"profesor", "ciclo", "matriculas", "sesiones"})
     private Modulo modulo;
 
     public Profesor(){}

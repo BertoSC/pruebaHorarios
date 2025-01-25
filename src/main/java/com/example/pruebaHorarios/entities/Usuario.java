@@ -14,7 +14,8 @@ public class Usuario {
     private String nombreUsuario;
     private String contraseña;
     private String email;
-
+    @Transient
+    private String tipo;
     public Usuario() {
     }
 
@@ -70,6 +71,10 @@ public class Usuario {
             return "ALUMNO";
         }
         return "";
+    }
+
+    public void setTipo(String tipo){
+        this.tipo=tipo;
     }
 
     @Override

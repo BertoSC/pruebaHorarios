@@ -14,34 +14,29 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    // Crear Usuario
     public Usuario createUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
-    // Obtener todos los usuarios
     public List<Usuario> getAllUsuarios() {
         return usuarioRepository.findAll();
     }
 
-    // Obtener un usuario por ID
     public Optional<Usuario> getUsuarioById(Integer id) {
         return usuarioRepository.findById(id);
     }
 
-    // Actualizar un usuario
     public Usuario updateUsuario(Integer id, Usuario usuarioDetails) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         usuario.setNombreUsuario(usuarioDetails.getNombreUsuario());
         usuario.setEmail(usuarioDetails.getEmail());
+        usuario.setTipo(usuarioDetails.getTipo());
 
-       // Si el tipo es un atributo en tu clase
 
         return usuarioRepository.save(usuario);
     }
 
-    // Eliminar un usuario
     public void deleteUsuario(Integer id) {
         usuarioRepository.deleteById(id);
     }
