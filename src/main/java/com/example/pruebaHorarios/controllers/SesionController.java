@@ -52,6 +52,26 @@ public class SesionController {
         return sesion.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+    @PutMapping("/{idSesion}")
+    public ResponseEntity<Sesion> actualizarSesion(@PathVariable int idSesion, @RequestBody Sesion sesionActualizada) {
+        Optional<Sesion> sesionExistente = sesionService.obtenerSesionPorId(idSesion);
+
+        if (sesionExistente.isPresent()) {
+            // Actualizar los datos de la sesión existente con los nuevos datos
+            Sesion sesion = sesionExistente.get();
+            sesion.setHoraInicio(sesionActualizada.getHoraInicio());
+            sesion.setHoraFin(sesionActualizada.getHoraFin());
+            sesion.setDia(sesionActualizada.getDia());
+            sesion.setAula(sesionActualizada.getAula());
+            sesion.setModulo(sesionActualizada.getModulo());
+
+            Sesion sesionGuardada = sesionService.crearSesion(sesion); // Usar el método de creación para guardar los cambios
+            return ResponseEntity.ok(sesionGuardada);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
     // Eliminar una sesión
     @DeleteMapping("/{idSesion}")
     public ResponseEntity<Void> eliminarSesion(@PathVariable int idSesion) {

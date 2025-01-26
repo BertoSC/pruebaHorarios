@@ -13,17 +13,17 @@ public class Matricula {
     private int numMatricula;
 
     @ManyToOne
-    @JoinColumn(name = "id_alumno", nullable = false)
+    @JoinColumn(name = "id_alumno")
     @JsonIgnoreProperties({"matriculas"})
     private Alumno alumno;
 
     @ManyToOne
-    @JoinColumn(name = "id_ciclo", nullable = false)
+    @JoinColumn(name = "id_ciclo")
     @JsonIgnoreProperties({"matriculas", "modulos"})
     private Ciclo cicloFormativo;
 
     @ManyToOne
-    @JoinColumn(name = "id_modulo", nullable = false)
+    @JoinColumn(name = "id_modulo")
     @JsonIgnoreProperties({"matriculas", "ciclo"})
     private Modulo modulo;
 
