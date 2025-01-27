@@ -16,35 +16,35 @@ public class ProfesorController {
     @Autowired
     private ProfesorService profesorService;
 
-    // Crear un profesor
+
     @PostMapping
     public ResponseEntity<Profesor> crearProfesor(@RequestBody Profesor profesor) {
         Profesor nuevoProfesor = profesorService.crearProfesor(profesor);
         return ResponseEntity.ok(nuevoProfesor);
     }
 
-    // Obtener todos los profesores
+
     @GetMapping
     public ResponseEntity<List<Profesor>> obtenerTodosProfesores() {
         List<Profesor> profesores = profesorService.obtenerTodosProfesores();
         return ResponseEntity.ok(profesores);
     }
 
-    // Obtener un profesor por ID
+
     @GetMapping("/{idProfesor}")
     public ResponseEntity<Profesor> obtenerProfesorPorId(@PathVariable int idProfesor) {
         Optional<Profesor> profesor = profesorService.obtenerProfesorPorId(idProfesor);
         return profesor.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Actualizar un profesor
+
     @PutMapping("/{idProfesor}")
     public ResponseEntity<Profesor> actualizarProfesor(@PathVariable int idProfesor, @RequestBody Profesor profesor) {
         Profesor actualizado = profesorService.actualizarProfesor(idProfesor, profesor);
         return actualizado != null ? ResponseEntity.ok(actualizado) : ResponseEntity.notFound().build();
     }
 
-    // Eliminar un profesor
+
     @DeleteMapping("/{idProfesor}")
     public ResponseEntity<Void> eliminarProfesor(@PathVariable int idProfesor) {
         return profesorService.eliminarProfesor(idProfesor) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();

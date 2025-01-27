@@ -17,21 +17,21 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    // Crear un usuario
+
     @PostMapping
     public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
         Usuario newUsuario = usuarioService.createUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUsuario);
     }
 
-    // Obtener todos los usuarios
+
     @GetMapping
     public ResponseEntity<List<Usuario>> getAllUsuarios() {
         List<Usuario> usuarios = usuarioService.getAllUsuarios();
         return ResponseEntity.ok(usuarios);
     }
 
-    // Obtener un usuario por ID
+
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> getUsuarioById(@PathVariable Integer id) {
         Optional<Usuario> usuario = usuarioService.getUsuarioById(id);
@@ -42,14 +42,14 @@ public class UsuarioController {
         }
     }
 
-    // Actualizar un usuario
+
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> updateUsuario(@PathVariable Integer id, @RequestBody Usuario usuarioDetails) {
         Usuario updatedUsuario = usuarioService.updateUsuario(id, usuarioDetails);
         return ResponseEntity.ok(updatedUsuario);
     }
 
-    // Eliminar un usuario
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUsuario(@PathVariable Integer id) {
         usuarioService.deleteUsuario(id);

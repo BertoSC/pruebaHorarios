@@ -67,10 +67,10 @@ public class Usuario {
     public String getTipo() {
         if (this instanceof Administrador) {
             return "ADMIN";
-        } else if (this instanceof Alumno) {
+        } else{
             return "ALUMNO";
         }
-        return "";
+
     }
 
     public void setTipo(String tipo){
