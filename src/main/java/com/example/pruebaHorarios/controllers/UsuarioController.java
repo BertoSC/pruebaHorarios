@@ -17,13 +17,50 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    // Crear un usuario
     @PostMapping
     public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
         Usuario newUsuario = usuarioService.createUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUsuario);
     }
 
+
+
+    /*
+    @PostMapping
+    public ResponseEntity<Usuario> createUsuario(@RequestBody Map<String, Object> body) {
+        // Recuperar el valor de "tipo" del JSON
+        String tipo = (String) body.get("tipo");
+
+        Usuario usuario;
+
+        // Instanciar según el valor de "tipo"
+        switch (tipo) {
+            case "ADMIN":
+                usuario = new Administrador(
+                        (String) body.get("nombreUsuario"),
+                        (String) body.get("contraseña"),
+                        (String) body.get("email")
+                );
+                break;
+            case "ALUMNO":
+                usuario = new Alumno(
+                        (String) body.get("nombreUsuario"),
+                        (String) body.get("contraseña"),
+                        (String) body.get("email")
+                );
+                break;
+            default:
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(null);
+        }
+
+        // Guardar el usuario
+        Usuario newUsuario = usuarioService.createUsuario(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newUsuario);
+    }
+
+
+ */
     // Obtener todos los usuarios
     @GetMapping
     public ResponseEntity<List<Usuario>> getAllUsuarios() {
