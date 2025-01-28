@@ -46,7 +46,7 @@ public class Modulo {
         this.horasTotales = horasTotales;
     }
 
-    // Getters y setters
+
     public int getIdModulo() {
         return idModulo;
     }
