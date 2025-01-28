@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+//PARA ACTUALIZAR LA BD DEL PROYECTO ALTER TABLE matricula RENAME COLUMN id_alumno TO id_usuario;
 @Entity
 public class Usuario {
     @Id
