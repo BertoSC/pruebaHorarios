@@ -1,12 +1,13 @@
 package com.example.pruebaHorarios.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,8 +15,9 @@ public class Usuario {
     private String nombreUsuario;
     private String contraseña;
     private String email;
-    @Transient
     private String tipo;
+    @JsonIgnoreProperties("usuario")
+    private List<Matricula> matriculas = new ArrayList<>();
     public Usuario() {
     }
 
@@ -65,16 +67,19 @@ public class Usuario {
     }
 
     public String getTipo() {
-        if (this instanceof Administrador) {
-            return "ADMIN";
-        } else if (this instanceof Alumno) {
-            return "ALUMNO";
-        }
-        return "";
+        return tipo;
     }
 
-    public void setTipo(String tipo){
-        this.tipo=tipo;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public List<Matricula> getMatriculas() {
+        return matriculas;
+    }
+
+    public void setMatriculas(List<Matricula> matriculas) {
+        this.matriculas = matriculas;
     }
 
     @Override
