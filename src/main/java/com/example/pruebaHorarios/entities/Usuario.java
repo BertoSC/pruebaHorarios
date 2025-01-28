@@ -16,6 +16,7 @@ public class Usuario {
     private String contraseña;
     private String email;
     private String tipo;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("usuario")
     private List<Matricula> matriculas = new ArrayList<>();
     public Usuario() {
